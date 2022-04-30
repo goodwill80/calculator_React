@@ -61,10 +61,19 @@ export const CalculatorReducer = (state, action)=>{
                 currentOperand: ''
             }
         case "DELETE":
-            if(state.currentOperand = "") return state;
+            if(state.currentOperand ==="") return state;
+            if(state.overwrite) {
+                return {
+                    ...state,
+                    currentOperand: "",
+                    overwrite: false
+                }
+            }
+            if(state.currentOperand.length === 1) {
+                return { ...state, currentOperand: '' }
+            }
             return {
-                ...state,
-                currentOperand: state.currentOperand
+                ...state, currentOperand: state.currentOperand.slice(0, -1)
             }
         case "EVALUATE":
             if(state.operation === "" || state.currentOperand ==="" || state.prevOperand ===""){
