@@ -8,6 +8,15 @@ const startingState = {
     overwrite: false
 }
 
+const Interger_Formatter = new Intl.NumberFormat("en-us", { maximumFractionDigits: 0});
+
+const formateOperand = (operand)=>{
+    if(operand === '') return;
+    const [interger, decimal] = operand.split('.');
+    if (decimal == null) return Interger_Formatter.format(interger);
+    return `${Interger_Formatter.format(interger)}.${decimal}`;
+}
+
 function Calculator() {
     const btnStyle = "bg-blue-500 w-24 h-24 text-white border border-blue-200 hover:bg-blue-900 rounded-lg text-2xl p-4"
     const [{ currentOperand, prevOperand, operation }, dispatch] = useReducer(CalculatorReducer, startingState)
@@ -38,10 +47,10 @@ function Calculator() {
 
         <div className='relative bg-black h-28 text-white flex flex-col justify-around items-end text-lg rounded-lg' style={{width: "405px"}}>
             <div className="mr-4">
-                { prevOperand } { operation }
+                { formateOperand(prevOperand) } { operation }
             </div>
             <div className="mr-4 text-5xl">
-                { currentOperand }
+                { formateOperand(currentOperand) }
             </div>
             <div className="absolute left-0 top-0 p-4 text-sm text-yellow-200">
                 Casio Fx-123

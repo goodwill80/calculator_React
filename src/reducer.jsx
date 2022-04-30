@@ -1,3 +1,4 @@
+//Helper Functions
 const evaluate = ({ currentOperand, prevOperand, operation})=>{
     const prev = parseFloat(prevOperand);
     const current = parseFloat(currentOperand);
@@ -20,6 +21,8 @@ const evaluate = ({ currentOperand, prevOperand, operation})=>{
     return computation.toString();
 }
 
+
+//REDUCER
 export const CalculatorReducer = (state, action)=>{
     switch(action.type) {
         case "ADD_DIGIT":
